@@ -95,3 +95,69 @@ pipeline {
 
 ###############################################################
 
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/yourusername/jenkins-java-demo.git'
+            }
+        }
+
+        stage('Compile Java') {
+            steps {
+                sh 'mkdir -p out'
+                sh 'javac -d out Main.java'
+            }
+        }
+
+        stage('Run Java App') {
+            steps {
+                sh 'java -cp out Main'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'out/*.class', fingerprint: true
+            }
+        }
+    }
+}
+
+
+##########################################################################
+
+
+give similar for java file,pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/yourusername/jenkins-cicd-demo.git'
+            }
+        }
+
+        stage('Run Python Script') {
+            steps {
+                sh 'python3 hello.py'
+            }
+        }
+
+        stage('Run Unit Tests') {
+            steps {
+                sh 'python3 -m unittest test_hello.py || echo "Tests failed but continuing"'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: '*.py', fingerprint: true
+            }
+        }
+    }
+}
