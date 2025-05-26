@@ -95,34 +95,3 @@ pipeline {
 
 ###############################################################
 
-
-
-agent any {
----
-- name: Install and Start Nginx
-  hosts: web
-  become: true  # Run tasks as sudo
-
-  tasks:
-    - name: Install Nginx (Debian)
-      apt:
-        name: nginx
-        state: present
-      when: ansible_os_family == "Debian"
-
-    - name: Install Nginx (RedHat)
-      yum:
-        name: nginx
-        state: present
-      when: ansible_os_family == "RedHat"
-
-    - name: Start and Enable Nginx
-      service:
-        name: nginx
-        state: started
-        enabled: true
-
-
-}
-
-
