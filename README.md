@@ -164,18 +164,18 @@ give similar for java file,pipeline {
 
 
 
-# Check uptime
+ Check uptime
 ansible localhost -m shell -a "uptime" --connection=local
 
-# List files in /tmp
+List files in /tmp
 ansible localhost -m command -a "ls /tmp" --connection=local
 
-# Create directory
+ Create directory
 ansible localhost -m file -a "path=/tmp/test_ansible state=directory mode=0755" --connection=local
 
-# Install a package (like curl)
+ Install a package (like curl)
 ansible localhost -m apt -a "name=curl state=present update_cache=true" --connection=local -b
 
-# Check disk usage
+ Check disk usage
 ansible localhost -m shell -a "df -h" --connection=local
 
