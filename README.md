@@ -13,3 +13,41 @@ mkdir "%DEST%"
 xcopy /E /Y "%SOURCE%\*" "%DEST%\"
 
 echo Deployment completed to %DEST%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main', url: 'https://github.com/moarray28/study.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Running build stage'
+                bat 'echo Hello World'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing complete'
+            }
+        }
+    }
+}
+
